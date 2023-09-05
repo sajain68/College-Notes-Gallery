@@ -75,7 +75,8 @@ pipeline {
                     try {
                         withCredentials([string(credentialsId: 'SNYK_TOKEN', variable: 'SNYK_TOKEN')]) {
                             sh 'npm install -g snyk'
-                            sh 'snyk monitor --all-projects'
+                            sh 'snyk code test --all-projects --severity-threshold=high'
+                            sh 'snyk monitor'
                         }
                     } catch (Exception e) {
                         currentBuild.result = 'FAILURE'
@@ -119,8 +120,7 @@ pipeline {
                 script {
                     try {
                         if (fileExists('composer.json')) {
-                            sh 'curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer'
-                            sh '/usr/local/bin/composer install'
+                            sh 'composer install'
                             sh 'phpunit'
                         }
                     } catch (Exception e) {
