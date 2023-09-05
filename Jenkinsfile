@@ -84,7 +84,6 @@ pipeline {
                     }
                 }
             }
-        }
         stage('Java Spring Boot Build and Test') {
             steps {
                 script {
