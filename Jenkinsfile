@@ -77,13 +77,13 @@ pipeline {
                             sh 'npm install -g snyk'
                             sh 'snyk monitor --all-projects'
                         }
-                        }
                     } catch (Exception e) {
                         currentBuild.result = 'FAILURE'
                         error("Error during Snyk analysis: ${e.message}")
                     }
                 }
             }
+        }
         stage('Java Spring Boot Build and Test') {
             steps {
                 script {
