@@ -119,7 +119,8 @@ pipeline {
                 script {
                     try {
                         if (fileExists('composer.json')) {
-                            sh 'composer install'
+                            sh 'curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer'
+                            sh '/usr/local/bin/composer install'
                             sh 'phpunit'
                         }
                     } catch (Exception e) {
